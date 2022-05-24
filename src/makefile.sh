@@ -1,3 +1,7 @@
+    # You can run this file to compile and run the game, if you are on Linux 64 and you have already installed g++ and the SDL2 library.
+    # Later, a newer version will pre-compile this game; so you'll not need tp install all libraries.
+    # But right now, it's sadly necessary. We're sorry for this...
+
 echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 echo building \'dream\' for 64 bits GNU/Linux.
 echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
