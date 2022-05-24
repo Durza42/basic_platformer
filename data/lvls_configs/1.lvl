@@ -1,0 +1,59 @@
+\background
+1
+   \posX
+   0
+   \posY
+   0
+   \sizeX
+   600
+   \sizeY
+   400
+   \path
+   ../data/imgs/forest_background.png
+\tileset % l'apparence des blocs de ce niveau.
+1
+   \path
+   ../data/tileset/dark.png
+\map
+   \sizeX
+   48
+   \sizeY
+   32
+   \map % '.' = vide ; 'X' = bloc ; 'S' = spawn
+   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XX............................................XX
+   XXXXXXX.......................................XX
+   XXXXXXX.......................................XX
+   XX............................................XX
+   XX............................................XX
+   XX..........XXXXXXXXXXXX......................XX
+   XX..........XXXXXXXXXXXX......................XX
+   XX..........XXXXXXXX..........XXXX............XX
+   XX..........XXXXXXXX..........XXXX............XX
+   XX..........XXXX..............................XX
+   XX..........XXXX........................XXXXXXXX
+   XX......................................XXXXXXXX
+   XX...........................................XXX
+   XX............................................XX
+   XX............................XXXX............XX
+   XX.......................XXXXXXXXXXXX.........XX
+   XX........S...........XXXXXXXXXXXXXXXXXXXXXXXXXX
+   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+\foreground
+0
+   \path
+   ../data/imgs/forest_filter.png
