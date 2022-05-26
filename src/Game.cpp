@@ -11,8 +11,6 @@
 Game::Game () :
       m_perso { "../data/imgs/perso.png", m_context.get_renderer () },
       m_forest { m_context.get_renderer (), 1 } {
-
-   std::cout << "[Game::Game] does not have segfault" << std::endl;
 }
 
 
