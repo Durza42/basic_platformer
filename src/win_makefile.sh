@@ -32,7 +32,7 @@ echo \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
 echo
 
-x86_64-w64-mingw32-g++ -std=c++17 -Wall -Wextra main.o Context.o Game.o Perso.o utilities.o Background.o Foreground.o Lvl.o Vector.o Input.o Grid.o Tileset.o -o ../exec/dream.exe   -I/home/durza42/programing/includes -L/home/durza42/programing/libs  `sdl2-config --libs` -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lssp -lstdc++
+x86_64-w64-mingw32-g++ -std=c++17 -Wall -Wextra main.o Context.o Game.o Perso.o utilities.o Background.o Foreground.o Lvl.o Vector.o Input.o Grid.o Tileset.o -o ../exec/dream.exe   -I/home/durza42/programing/includes -L/home/durza42/programing/libs  `sdl2-config --libs` -lSDL2_image -lSDL2_mixer -lssp -lstdc++
 
 echo
 

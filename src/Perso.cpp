@@ -104,7 +104,7 @@ void Perso::jump () {
  * (en prenant en compte les blocs et autres) *
  **********************************************/
 
-void Perso::moove_x (const Grid & grid, SDL_Renderer* renderer) {
+void Perso::moove_x (const Grid & grid) {
 
    if (m_moove.get_x() == 0)
       return;
@@ -222,7 +222,7 @@ void Perso::fall (const Grid & grid) {
  * de son vecteur mouvement         *
  ************************************/
 
-bool Perso::moove (const Grid & grid, SDL_Renderer* renderer) {
+bool Perso::moove (const Grid & grid) {
 
       // on fait tomber le perso
    fall (grid);
@@ -232,7 +232,7 @@ bool Perso::moove (const Grid & grid, SDL_Renderer* renderer) {
       return false; // il ne se déplace pas
 
       // on fait bouger le perso sur l'axe X
-   moove_x (grid, renderer);
+   moove_x (grid);
 
       // on fait bouger le perso sur l'axe Y
    moove_y (grid);
