@@ -96,7 +96,7 @@ void Grid::load (std::vector<std::vector<char>> & grid, Tileset tileset) {
    m_col_grid = grid;
 
    std::vector<SDL_Texture*> tmp_text_v(grid[0].size(), NULL);
-   for (size_t i = 0 ; i < grid.size() ; ++i)
+   for (size_t i {0} ; i < grid.size() ; ++i)
       m_look_grid.push_back(tmp_text_v);
 
    automap(tileset);
@@ -110,10 +110,31 @@ void Grid::load (std::vector<std::vector<char>> & grid, Tileset tileset) {
  ***********************************************************/
 
 bool Grid::has_col (SDL_Rect & r) const {
+
+   if (m_col_grid[r.x / BLOC_GRID_SIZE][r.y / BLOC_GRID_SIZE] == 'X')
+      return true;
+
       // Pour chaque tuile dans le rectangle : si vaut 'X' (mur), renvoyer vrai. 
-   for (int i { r.x / BLOC_GRID_SIZE } ; i < r.x / BLOC_GRID_SIZE + r.w / BLOC_GRID_SIZE ; ++i)
-      for (int j { r.y / BLOC_GRID_SIZE } ; j < r.y / BLOC_GRID_SIZE + r.h / BLOC_GRID_SIZE ; ++j)
+   for (int i { r.x / BLOC_GRID_SIZE } ; i <= (r.x + r.w) / BLOC_GRID_SIZE ; ++i)
+      for (int j { r.y / BLOC_GRID_SIZE } ; j <= (r.y + r.h) / BLOC_GRID_SIZE ; ++j)
          if (m_col_grid[i][j] == 'X')
             return true;
    return false;
 }
+
+
+/**********************************************
+ * is_wall :                                  *
+ * ---------                                  *
+ * indique si le bloc donné est un mur ou non *
+ **********************************************/
+
+bool Grid::is_wall (size_t x, size_t y) const {
+
+   if (m_col_grid[x][y] == 'X')
+      return true;
+   else
+      return false;
+}
+
+

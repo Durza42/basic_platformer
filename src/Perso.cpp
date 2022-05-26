@@ -104,25 +104,35 @@ void Perso::jump () {
  * (en prenant en compte les blocs et autres) *
  **********************************************/
 
-void Perso::moove_x (const Grid & grid) {
+void Perso::moove_x (const Grid & grid, SDL_Renderer* renderer) {
 
-      // il ne bougera pas en x
-   if (m_moove.get_x () == 0)
+   if (m_moove.get_x() == 0)
       return;
 
-      // ce rectangle représente tout le chemin parcouru par le perso entre son point de départ et son point d'arrivée.
-      // Si il y a un bloc dans ce rectangle, c'est qu'en bougeant il le traverserait.
-   SDL_Rect no_blocs_zone { m_pos.x, m_pos.y, int(m_moove.get_x ()) + m_pos.w, m_pos.h };
+      // il va vers la droite
+   if (m_moove.get_x() > 0) {
 
-      // TODO
-   if (grid.has_col(no_blocs_zone)) { // le perso ne peut juste pas avancer.
-      if (m_moove.get_x() > 0) // on le place juste devant le mur
-         m_pos.x += m_pos.x % BLOC_GRID_SIZE;
-      else
-         m_pos.x -= m_pos.x % BLOC_GRID_SIZE;
+      SDL_Rect col_zone { m_pos.x, m_pos.y, m_pos.w + int(round(m_moove.get_x())), m_pos.h };
+
+      if (!grid.has_col(col_zone))
+         m_pos.x += int(round(m_moove.get_x()));
+      else {
+         m_moove.set_x(0);
+         if (m_pos.x % BLOC_GRID_SIZE > 1)
+            m_pos.x += BLOC_GRID_SIZE - (m_pos.x % BLOC_GRID_SIZE) - 1;
+      }
    }
    else {
-      m_pos.x += m_moove.get_x();
+
+      SDL_Rect col_zone { m_pos.x - (0 - int(round(m_moove.get_x()))), m_pos.y, m_pos.w + (0 - int(round(m_moove.get_x()))), m_pos.h };
+
+      if (!grid.has_col(col_zone))
+         m_pos.x += int(round(m_moove.get_x()));
+      else {
+         m_moove.set_x(0);
+         if (m_pos.x % BLOC_GRID_SIZE > 1)
+            m_pos.x -= m_pos.x % BLOC_GRID_SIZE - 1;
+      }
    }
 }
 
@@ -136,24 +146,19 @@ void Perso::moove_x (const Grid & grid) {
 
 void Perso::moove_y (const Grid & grid) {
 
-      // ne bougera pas en y
-   if (m_moove.get_y () == 0)
-      return;
-
-      // ce rectangle représente tout le chemin parcouru par le perso entre son point de départ et son point d'arrivée.
-      // Si il y a un bloc dans ce rectangle, c'est qu'en bougeant il le traverserait.
-   SDL_Rect no_blocs_zone { m_pos.x, m_pos.y, m_pos.w, int(m_moove.get_y ()) + m_pos.h };
-
-   if (grid.has_col(no_blocs_zone)) { // le perso ne peut juste pas avancer.
-/*
-      if (m_moove.get_y() > 0) // on le place juste devant le mur
-         m_pos.y += m_pos.y % BLOC_GRID_SIZE;
+   if (m_moove.get_y() > 0) {
+      SDL_Rect col_zone { m_pos.x, m_pos.y, m_pos.w, m_pos.h + int(round(m_moove.get_y())) };
+      if (!grid.has_col(col_zone))
+         m_pos.y += int(round(m_moove.get_y()));
       else
-         m_pos.y -= m_pos.y % BLOC_GRID_SIZE;
-*/
+         m_moove.set_y(0);
    }
-   else {
-      m_pos.y += m_moove.get_y();
+   else if (m_moove.get_y() < 0) {
+      SDL_Rect col_zone { m_pos.x, m_pos.y - (0 - int(round(m_moove.get_y()))), m_pos.w, m_pos.h + (0 - int(round(m_moove.get_y()))) };
+      if (!grid.has_col(col_zone))
+         m_pos.y += int(round(m_moove.get_y()));
+      else
+         m_moove.set_y(0);
    }
 }
 
@@ -183,31 +188,29 @@ void Perso::loose_speed () {
 
 void Perso::fall (const Grid & grid) {
 
-   if (m_moove.get_y () == 0) {
-
-         // hitbox du perso plus 1 en hauteur (pour tester si il touche le sol)
-      SDL_Rect hitbox { m_pos.x, m_pos.y, m_pos.w, m_pos.h + 1 };
-
-      if (grid.has_col (hitbox)) {
+   if (m_moove.get_y() == 0) {
+      if (grid.is_wall(m_pos.x / BLOC_GRID_SIZE, (m_pos.y + m_pos.h) / BLOC_GRID_SIZE + 1)) {
          m_can_jump = true;
+         if (m_pos.y % BLOC_GRID_SIZE > 1)
+            m_pos.y += BLOC_GRID_SIZE - (m_pos.y % BLOC_GRID_SIZE) - 1;
          return;
+      }
+      else {
+         m_can_jump = false;
+         SDL_Rect hitbox { m_pos.x, m_pos.y, m_pos.w, m_pos.h + GRAVITY_ADD }; // -1 pour compenser celui mis à l'initialisation
+         if (!grid.has_col(hitbox)) {
+            m_moove += (Vector){ 0, GRAVITY_ADD };
+            return;
+         }
+         else {
+            m_moove.set_y(0);
+            return;
+         }
       }
    }
    else {
-
-         // ce rectangle représente tout le chemin parcouru par le perso entre son point de départ et son point d'arrivée.
-         // Si il y a un bloc dans ce rectangle, c'est qu'en bougeant il le traverserait.
-      SDL_Rect no_blocs_zone { m_pos.x, m_pos.y, m_pos.w, m_pos.h + int(m_moove.get_y ()) };
-
-      if (!grid.has_col (no_blocs_zone)) {
-         m_can_jump = false;
-         m_moove += (Vector){ 0, GRAVITY_ADD };
-      }
-      else {
-         m_pos.y = ((no_blocs_zone.y + no_blocs_zone.h) / BLOC_GRID_SIZE * BLOC_GRID_SIZE) - m_pos.h;
-         m_moove.set_y (0);
-         m_can_jump = true;
-      }
+      m_moove += (Vector){ 0, GRAVITY_ADD };
+      m_can_jump = false;
    }
 }
 
@@ -219,7 +222,7 @@ void Perso::fall (const Grid & grid) {
  * de son vecteur mouvement         *
  ************************************/
 
-bool Perso::moove (const Grid & grid) {
+bool Perso::moove (const Grid & grid, SDL_Renderer* renderer) {
 
       // on fait tomber le perso
    fall (grid);
@@ -229,7 +232,7 @@ bool Perso::moove (const Grid & grid) {
       return false; // il ne se déplace pas
 
       // on fait bouger le perso sur l'axe X
-   moove_x (grid);
+   moove_x (grid, renderer);
 
       // on fait bouger le perso sur l'axe Y
    moove_y (grid);

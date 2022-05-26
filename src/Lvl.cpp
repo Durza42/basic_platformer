@@ -10,7 +10,6 @@
 
 Lvl::Lvl (SDL_Renderer* renderer, const size_t & lvl_id) {
    load_lvl (lvl_id, renderer);
-   std::cout << "[Lvl::lvl] does not have segfault" << std::endl;
 }
 
 
