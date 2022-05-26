@@ -10,8 +10,7 @@
 
 Context::Context () :
          m_window { NULL },
-         m_renderer { NULL },
-         m_font { NULL } {                   
+         m_renderer { NULL } {
 
       // On essaies d'initialiser la SDL (bibliothèque graphique).
       // Si ça rate, on affiche un message d'erreur et on quitte.
@@ -54,18 +53,6 @@ Context::Context () :
 Context::~Context () {
    SDL_DestroyWindow (m_window);
    SDL_DestroyRenderer (m_renderer);
-   TTF_CloseFont (m_font);
-}
-
-
-/*******************************************
- * get_font :                              *
- * ----------                              *
- * permet d'obtenir la police de caractère *
- *******************************************/
-
-TTF_Font* Context::get_font () const {
-   return m_font;
 }
 
 

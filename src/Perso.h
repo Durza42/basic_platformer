@@ -30,11 +30,11 @@ class Perso {
    void go_left ();
    void jump ();
 
-   void moove_x (const Grid & grid, SDL_Renderer* renderer);
+   void moove_x (const Grid & grid);
    void moove_y (const Grid & grid);
    void loose_speed ();
    void fall (const Grid & grid);
-   bool moove (const Grid & grid, SDL_Renderer* renderer);
+   bool moove (const Grid & grid);
 
   private:
 

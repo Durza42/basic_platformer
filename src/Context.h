@@ -2,7 +2,6 @@
  #define CONTEXT_H
 
  #include <SDL2/SDL.h>
- #include <SDL2/SDL_ttf.h>
 
  #define REFRESH_RATE (1000. / 30.) // 30 fps
 
@@ -23,7 +22,6 @@ class Context {
    Context ();
    ~Context ();
 
-   TTF_Font* get_font () const;
    SDL_Renderer* get_renderer () const;
 
   private:
@@ -33,9 +31,6 @@ class Context {
       // C'est en quelque sorte la feuille que l'on colle à la fenêtre.
       // C'est ici que l'on va "dessiner" le jeu.
    SDL_Renderer* m_renderer;
-
-      // police de caractères utilisée dans le jeu
-   TTF_Font* m_font;
 };
 
 #endif

@@ -11,8 +11,6 @@
 Game::Game () :
       m_perso { "../data/imgs/perso.png", m_context.get_renderer () },
       m_forest { m_context.get_renderer (), 1 } {
-
-   std::cout << "[Game::Game] does not have segfault" << std::endl;
 }
 
 
@@ -46,7 +44,7 @@ void Game::main_loop () {
       do_events ();
 
          // on fait bouger le perso si besoin
-      m_perso.moove (m_forest.get_grid(), m_context.get_renderer());
+      m_perso.moove (m_forest.get_grid());
 
          // on rafraichit l'écran
       refresh ();

@@ -50,10 +50,6 @@ bool Lvl::load_lvl (const size_t & lvl_id, SDL_Renderer* renderer) {
    load_grid (file);
    load_foreground (file, renderer);
 
-   std::cout << "_____________" << std::endl;
-   std::cout << "Lvl::load_lvl does not have segfault!! :D" << std::endl;
-   std::cout << "¨¨¨¨¨¨¨¨¨¨¨¨¨" << std::endl;
-
    return true;
 }
 
@@ -141,13 +137,6 @@ void Lvl::load_grid (std::ifstream& file) {
          if (grid[j][i] == '\n')
             --j;
       }
-   }
-
-   for (size_t i { 0 } ; i < sizeY ; ++i) {
-      for (size_t j { 0 } ; j < sizeX ; ++j) {
-         std::cout << grid[j][i];
-      }
-      std::cout << std::endl;
    }
 
       // et on la charge dans la classe correspondante
