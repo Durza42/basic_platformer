@@ -13,7 +13,7 @@
  #define PERSO_WIDTH    50
 
  #define MOOVE_ADD   7.5
- #define JUMP_ADD    (-20)
+ #define JUMP_ADD    (-25)
  #define GRAVITY_ADD 2
 
 class Perso {
@@ -30,11 +30,11 @@ class Perso {
    void go_left ();
    void jump ();
 
-   void moove_x (const Grid & grid);
+   void moove_x (const Grid & grid, SDL_Renderer* renderer);
    void moove_y (const Grid & grid);
    void loose_speed ();
    void fall (const Grid & grid);
-   bool moove (const Grid & grid);
+   bool moove (const Grid & grid, SDL_Renderer* renderer);
 
   private:
 

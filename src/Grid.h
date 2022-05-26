@@ -26,6 +26,7 @@ class Grid {
    void automap (Tileset tileset); // <- TODO
 
    bool has_col (SDL_Rect & r) const;
+   bool is_wall (size_t x, size_t y) const;
 
   private:
 
