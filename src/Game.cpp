@@ -44,7 +44,7 @@ void Game::main_loop () {
       do_events ();
 
          // on fait bouger le perso si besoin
-      m_perso.moove (m_forest.get_grid());
+      m_perso.moove (m_forest.get_grid(), m_context.get_renderer());
 
          // on rafraichit l'écran
       refresh ();
@@ -94,7 +94,7 @@ void Game::do_events () {
 void Game::refresh () {
 
       // on efface le renderer
-   SDL_RenderClear (m_context.get_renderer ());
+//   SDL_RenderClear (m_context.get_renderer ());
 
       // on dessine l'arrière plan du niveau
    m_forest.get_background ().print (m_context.get_renderer ());
@@ -115,6 +115,7 @@ void Game::refresh () {
       // on met la fenêtre à jour (on copie le renderer, sur lequel on vient de dessiner, dessus)
    SDL_RenderPresent (m_context.get_renderer ());
 
+   SDL_RenderClear (m_context.get_renderer ());
 }
 
 
