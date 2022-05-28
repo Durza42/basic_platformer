@@ -57,7 +57,7 @@ Perso::~Perso () {
  ***********************************/
 
 void Perso::print (SDL_Renderer* renderer) {
-   SDL_Rect center { DEFAULT_WINDOW_WIDTH / 2 - 25, DEFAULT_WINDOW_HEIGHT / 2 - 25, 50, 50 };
+   SDL_Rect center { DEFAULT_WINDOW_WIDTH / 2 - 25, DEFAULT_WINDOW_HEIGHT / 2 - 25, PERSO_WIDTH, PERSO_HEIGHT };
    SDL_RenderCopy (renderer, m_look, NULL, &center);
 }
 
@@ -194,7 +194,8 @@ void Perso::loose_speed () {
 void Perso::fall (const Grid & grid) {
 
    if (m_moove.get_y() == 0) {
-      if (grid.is_wall(m_pos.x / BLOC_GRID_SIZE, (m_pos.y + m_pos.h) / BLOC_GRID_SIZE + 1)) {
+      if (grid.is_wall(m_pos.x / BLOC_GRID_SIZE, (m_pos.y + m_pos.h) / BLOC_GRID_SIZE + 1)
+       || grid.is_wall((m_pos.x + m_pos.w) / BLOC_GRID_SIZE, (m_pos.y + m_pos.h) / BLOC_GRID_SIZE + 1)) {
          m_can_jump = true;
          if (m_pos.y % BLOC_GRID_SIZE > 1)
             m_pos.y += BLOC_GRID_SIZE - (m_pos.y % BLOC_GRID_SIZE) - 1;
