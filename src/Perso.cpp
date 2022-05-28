@@ -151,8 +151,12 @@ void Perso::moove_y (const Grid & grid) {
       SDL_Rect col_zone { m_pos.x, m_pos.y, m_pos.w, m_pos.h + int(round(m_moove.get_y())) };
       if (!grid.has_col(col_zone))
          m_pos.y += int(round(m_moove.get_y()));
-      else
+      else {
          m_moove.set_y(0);
+         if (m_pos.y % BLOC_GRID_SIZE > 1)
+            m_pos.y += BLOC_GRID_SIZE - (m_pos.y % BLOC_GRID_SIZE) - 1;
+         m_can_jump = true;
+      }
    }
    else if (m_moove.get_y() < 0) {
       SDL_Rect col_zone { m_pos.x, m_pos.y - (0 - int(round(m_moove.get_y()))), m_pos.w, m_pos.h + (0 - int(round(m_moove.get_y()))) };
