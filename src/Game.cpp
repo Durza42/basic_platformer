@@ -94,7 +94,7 @@ void Game::do_events () {
 void Game::refresh () {
 
       // on efface le renderer
-//   SDL_RenderClear (m_context.get_renderer ());
+   SDL_RenderClear (m_context.get_renderer ());
 
       // on dessine l'arrière plan du niveau
    m_forest.get_background ().print (m_context.get_renderer ());
@@ -107,15 +107,13 @@ void Game::refresh () {
    m_perso.print (m_context.get_renderer ());
 
       // on affiche chaque bloc du niveau
-   m_forest.get_grid ().print (m_context.get_renderer ());
+   m_forest.get_grid ().print (m_context.get_renderer (), -m_perso.get_offset().x, -m_perso.get_offset().y);
 
       // on dessine l'avant-plan
    m_forest.get_foreground ().print (m_context.get_renderer ());
 
       // on met la fenêtre à jour (on copie le renderer, sur lequel on vient de dessiner, dessus)
    SDL_RenderPresent (m_context.get_renderer ());
-
-   SDL_RenderClear (m_context.get_renderer ());
 }
 
 

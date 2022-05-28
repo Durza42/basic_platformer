@@ -232,8 +232,8 @@ Foreground Lvl::get_foreground () const {
  * affiche tous les blocs du niveau *
  ************************************/
 
-void Lvl::print_grid (SDL_Renderer* renderer) {
-   m_grid.print (renderer);
+void Lvl::print_grid (SDL_Renderer* renderer, int x_offset, int y_offset) {
+   m_grid.print (renderer, x_offset, y_offset);
 }
 
 
