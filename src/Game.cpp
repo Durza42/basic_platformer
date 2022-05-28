@@ -44,7 +44,7 @@ void Game::main_loop () {
       do_events ();
 
          // on fait bouger le perso si besoin
-      m_perso.moove (m_forest.get_grid(), m_context.get_renderer());
+      m_perso.moove (m_forest.get_grid());
 
          // on rafraichit l'écran
       refresh ();
