@@ -11,7 +11,7 @@
 
 Perso::Perso () :
        m_look { NULL },
-       m_pos { 400, 300, PERSO_WIDTH, PERSO_HEIGHT },
+       m_pos { DEFAULT_PERSO_POS_X, DEFAULT_PERSO_POS_Y, PERSO_WIDTH, PERSO_HEIGHT },
        m_dir { 1, 0 },
        m_moove { 0, 0 },
        m_can_jump { true } {
@@ -29,7 +29,7 @@ Perso::Perso () :
 
 Perso::Perso (const char* path, SDL_Renderer* renderer) :
        m_look { uts::load_img (path, renderer) },
-       m_pos { 400, 300, PERSO_WIDTH, PERSO_HEIGHT },
+       m_pos { DEFAULT_PERSO_POS_X, DEFAULT_PERSO_POS_Y, PERSO_WIDTH, PERSO_HEIGHT },
        m_dir { 1, 0 },
        m_moove { 0, 0 },
        m_can_jump { true } {
@@ -57,7 +57,8 @@ Perso::~Perso () {
  ***********************************/
 
 void Perso::print (SDL_Renderer* renderer) {
-   SDL_RenderCopy (renderer, m_look, NULL, &m_pos);
+   SDL_Rect center { DEFAULT_WINDOW_WIDTH / 2 - 25, DEFAULT_WINDOW_HEIGHT / 2 - 25, 50, 50 };
+   SDL_RenderCopy (renderer, m_look, NULL, &center);
 }
 
 
@@ -241,4 +242,15 @@ bool Perso::moove (const Grid & grid, SDL_Renderer* renderer) {
    loose_speed ();
 
    return true;
+}
+
+
+/*************************************************************************
+ * get_pos :                                                             *
+ * ---------                                                             *
+ * retourne le décalage de la grille en fonction de la position du perso *
+ *************************************************************************/
+
+SDL_Point Perso::get_offset () const {
+   return (SDL_Point){ m_pos.x - (DEFAULT_WINDOW_WIDTH / 2 - 25), m_pos.y - (DEFAULT_WINDOW_HEIGHT / 2 - 25) };
 }

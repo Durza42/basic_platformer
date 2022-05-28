@@ -8,6 +8,10 @@
  #include "utilities.h"
  #include "Vector.h"
  #include "Grid.h"
+ #include "Context.h"
+
+ #define DEFAULT_PERSO_POS_X 400
+ #define DEFAULT_PERSO_POS_Y 300
 
  #define PERSO_HEIGHT   50
  #define PERSO_WIDTH    50
@@ -35,6 +39,8 @@ class Perso {
    void loose_speed ();
    void fall (const Grid & grid);
    bool moove (const Grid & grid, SDL_Renderer* renderer);
+
+   SDL_Point get_offset () const;
 
   private:
 

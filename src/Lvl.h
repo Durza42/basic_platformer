@@ -40,7 +40,7 @@ class Lvl {
    void load_tileset (std::ifstream& file, SDL_Renderer* renderer);
    void load_background (std::ifstream& file, SDL_Renderer* renderer);
 
-   void print_grid (SDL_Renderer* renderer);
+   void print_grid (SDL_Renderer* renderer, int x_offet, int y_offset);
 
   private:
 

@@ -1,7 +1,7 @@
 #include "Grid.h"
 
 Grid::Grid () {
-   
+
 }
 
 Grid::~Grid () {
@@ -15,13 +15,15 @@ Grid::~Grid () {
  * affiche toute la grille *
  ***************************/
 
-void Grid::print (SDL_Renderer* renderer) {
+void Grid::print (SDL_Renderer* renderer, int x_offset, int y_offset) {
 
    for (size_t i {0} ; i < m_col_grid.size() ; ++i) {
       for (size_t j {0} ; j < m_col_grid[0].size() ; ++j) {
 
             // créé uniquement car SDL_RenderCopy demande un pointeur
-         SDL_Rect pos_this_square = { (int)i * BLOC_GRID_SIZE, (int)j * BLOC_GRID_SIZE, BLOC_GRID_SIZE, BLOC_GRID_SIZE };
+         SDL_Rect pos_this_square = { (int)i * BLOC_GRID_SIZE + x_offset,
+                                      (int)j * BLOC_GRID_SIZE + y_offset,
+                                      BLOC_GRID_SIZE, BLOC_GRID_SIZE };
          SDL_RenderCopy (renderer, m_look_grid[i][j], NULL, &pos_this_square);
       }
    }
@@ -136,5 +138,3 @@ bool Grid::is_wall (size_t x, size_t y) const {
    else
       return false;
 }
-
-
