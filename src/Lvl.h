@@ -12,6 +12,7 @@
  #include "Foreground.h"
  #include "Grid.h"
  #include "Tileset.h"
+ #include "Perso.h"
 
 
 /****************
@@ -42,6 +43,8 @@ class Lvl {
 
    void print_grid (SDL_Renderer* renderer, int x_offet, int y_offset);
 
+   SDL_Point get_spawn () const;
+
   private:
 
       // type de lvl
@@ -58,6 +61,9 @@ class Lvl {
 
       // jeu d'apparences des murs
    Tileset m_tileset;
+
+      // point d'apparition du joueur
+   SDL_Point m_spawn;
 };
 
 #endif

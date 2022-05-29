@@ -8,7 +8,8 @@
  * C'est cette fonction qui sera appelée à la création de l'objet *
  ******************************************************************/
 
-Lvl::Lvl (SDL_Renderer* renderer, const size_t & lvl_id) {
+Lvl::Lvl (SDL_Renderer* renderer, const size_t & lvl_id) :
+     m_spawn { DEFAULT_PERSO_POS_X, DEFAULT_PERSO_POS_Y } {
    load_lvl (lvl_id, renderer);
 }
 
@@ -136,6 +137,10 @@ void Lvl::load_grid (std::ifstream& file) {
          grid[j][i] = file.get();
          if (grid[j][i] == '\n')
             --j;
+         else if (grid[j][i] == 'S') {
+            m_spawn.x = j * 25;
+            m_spawn.y = i * 25;
+         }
       }
    }
 
@@ -245,4 +250,8 @@ void Lvl::print_grid (SDL_Renderer* renderer, int x_offset, int y_offset) {
 
 Grid Lvl::get_grid () const {
    return m_grid;
+}
+
+SDL_Point Lvl::get_spawn () const {
+   return m_spawn;
 }

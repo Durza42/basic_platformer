@@ -37,6 +37,24 @@ Perso::Perso (const char* path, SDL_Renderer* renderer) :
 }
 
 
+/****************************************************************************
+ * perso :                                                                  *
+ * -------                                                                  *
+ * constructeur de la classe Perso                                          *
+ * C'est cette fonction qui sera appelée à la création de l'objet,          *
+ * si le chemin de son image ainsi que le spawn sont spécifiées en argument *
+ ****************************************************************************/
+
+Perso::Perso (const char* path, SDL_Renderer* renderer, const SDL_Point spawn) :
+       m_look { uts::load_img (path, renderer) },
+       m_pos { spawn.x, spawn.y, PERSO_WIDTH, PERSO_HEIGHT },
+       m_dir { 1, 0 },
+       m_moove { 0, 0 },
+       m_can_jump { true } {
+
+}
+
+
 /**********************************************************************
  * ~Perso :                                                           *
  * ------                                                             *
@@ -203,7 +221,7 @@ void Perso::fall (const Grid & grid) {
       }
       else {
          m_can_jump = false;
-         SDL_Rect hitbox { m_pos.x, m_pos.y, m_pos.w, m_pos.h + GRAVITY_ADD }; // -1 pour compenser celui mis à l'initialisation
+         SDL_Rect hitbox { m_pos.x, m_pos.y, m_pos.w, m_pos.h + GRAVITY_ADD };
          if (!grid.has_col(hitbox)) {
             m_moove += (Vector){ 0, GRAVITY_ADD };
             return;

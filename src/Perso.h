@@ -26,6 +26,7 @@ class Perso {
 
    Perso ();
    Perso (const char* path, SDL_Renderer* renderer);
+   Perso (const char* path, SDL_Renderer* renderer, SDL_Point spawn);
    ~Perso ();
 
    void print (SDL_Renderer* renderer);

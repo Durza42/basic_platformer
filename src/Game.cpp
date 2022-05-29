@@ -9,8 +9,8 @@
  *******************************************************************/
 
 Game::Game () :
-      m_perso { "../data/imgs/perso.png", m_context.get_renderer () },
-      m_forest { m_context.get_renderer (), 1 } {
+      m_forest { m_context.get_renderer (), 1 },
+      m_perso { "../data/imgs/perso.png", m_context.get_renderer (), m_forest.get_spawn() } {
 }
 
 

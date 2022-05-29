@@ -36,12 +36,13 @@ class Game {
       // voir le fichier Input.h
    Input m_input;
 
-      // le personage que le joueur contrôle
-   Perso m_perso;
-
    /* TODO: tableau pour être flexible quant à l'ajout de niveaux */
       // le niveau 'forêt'
    Lvl m_forest;
+
+      // le personage que le joueur contrôle
+   Perso m_perso;
+
 };
 
 #endif
